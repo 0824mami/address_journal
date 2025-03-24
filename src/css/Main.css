@@ -1,0 +1,16 @@
+main .card {
+    margin: 6px 16px;
+    padding: 8px 18px;
+    width: 400px;
+    height: 220px;
+    background: #DE8D8D;
+    box-shadow: 0 0 5px #ccc;
+    font-size: 0.6rem;
+    color: #fff;
+}
+
+main .main_visual {
+    right: 16px;
+    max-height: 500px;
+    top: -50px;
+}
