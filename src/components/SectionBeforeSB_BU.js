@@ -36,29 +36,19 @@ const Section = ({ mode }) => {
   const [interviewAnswers, setInterviewAnswers] = useState(['', '', '']);
 
   // 初期入力送信時の処理
-  const handleInitialSubmit = async () => {
+  const handleInitialSubmit = () => {
     if (eventTheme.trim() === '' && feel.trim() === '') return;
-  
-    const newEntry = {
-      eventTheme,
-      feel,
-      mode, // モードも一緒に保存しておくと便利！
-    };
-  
-    const { data, error } = await supabase
-      .from('journalEntries') 
-      .insert([newEntry]);
-  
-    if (error) {
-      console.error('送信失敗:', error);
-    } else {
-      console.log('送信成功🎉:', data);
-      setEventTheme('');
-      setFeel('');
-      setShowInterview(true);
-      // 画面上にも追加するならこれもあり：
-      setJournalEntries([...journalEntries, newEntry]);
-    }
+
+   
+    const newEntry = { eventTheme, feel };
+    setJournalEntries([...journalEntries, newEntry]);
+    setEventTheme('');
+    setFeel('');
+    // 初期入力送信後、インタビューセクションを表示
+    setShowInterview(true);
+
+    // ページのトップにスクロール
+    // window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   // 動的にインタビュー入力欄を追加する（最大5つまで）
