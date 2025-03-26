@@ -118,11 +118,14 @@ const Section = ({ mode }) => {
   return (
     <section className='section' style={sectionStyle}>
       <div className='heading'>
+      {mode === 'good' ? (
+    <>
         <h1>まだ叶ってない“未来”を、先に書いてみよう。
         <span style={{ fontSize: '0.9em', color: '#666', marginBottom: '20px' }}>
           What if you wrote it down?
         </span>
         </h1>
+
         <p>
         このジャーナルは、あなたの“内なる手紙”。
         「なぜそれができたの？」「どうして乗り越えられたの？」
@@ -131,6 +134,25 @@ const Section = ({ mode }) => {
   “How did you do it?” “What helped you get through?”  
   Imagine future-you answering those questions, and let the words flow.</span> */}
         </p>
+
+        
+        
+        </>
+  ) : (
+    <>
+    <h1>このジャーナルは、モヤモヤした気持ちを一度、外に出す場所
+        <span style={{ fontSize: '0.9em', color: '#666', marginBottom: '20px' }}>
+        What if you let it out?
+        </span>
+        </h1>
+       
+        <p>
+        つづき＿このジャーナルは、モヤモヤした気持ちを一度、外に出す場所
+        「そうだったんだね」「なぜそう思うの？」と自分に問いかけてみて。
+        {/* <span>What if you let it out?</span> */}
+        </p>
+        </>
+  )}
       </div>
       
       <div className='journalArea'>
