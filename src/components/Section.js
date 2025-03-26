@@ -47,17 +47,20 @@ const Section = ({ mode }) => {
   
     const { data, error } = await supabase
       .from('journalEntries') 
-      .insert([newEntry]);
+      .insert([newEntry])
+      .select();
   
     if (error) {
       console.error('送信失敗:', error);
     } else {
       console.log('送信成功🎉:', data);
+      const insertedEntry = data[0];
       setEventTheme('');
       setFeel('');
       setShowInterview(true);
       // 画面上にも追加するならこれもあり：
-      setJournalEntries([...journalEntries, newEntry]);
+      setJournalEntries([...journalEntries, insertedEntry]);
+      console.log('Updated journalEntries:', [...journalEntries, newEntry]);
     }
   };
 
