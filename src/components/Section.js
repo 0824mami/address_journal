@@ -34,6 +34,10 @@ const Section = ({ mode }) => {
   // インタビューセクションの表示状態と回答内容
   const [showInterview, setShowInterview] = useState(false);
   const [interviewAnswers, setInterviewAnswers] = useState(['', '', '']);
+// buttonした
+  const [title, setTitle] = useState('');
+  const [reflection, setReflection] = useState('');
+  const [showSummaryInputs, setShowSummaryInputs] = useState(false);
 
   // 初期入力送信時の処理
   const handleInitialSubmit = async () => {
@@ -53,7 +57,7 @@ const Section = ({ mode }) => {
     if (error) {
       console.error('送信失敗:', error);
     } else {
-      console.log('送信成功🎉:', data);
+      console.log('送信成功！:', data);
       const insertedEntry = data[0];
       setEventTheme('');
       setFeel('');
@@ -78,37 +82,68 @@ const Section = ({ mode }) => {
   };
 
   // インタビュー内容送信時の処理（必要に応じてjournalEntriesに統合するなど）
-  const handleInterviewFinish = () => {
+  const handleInterviewFinish = async() => {
     console.log('Interview answers:', interviewAnswers);
-    // 例として、最新の日記エントリにインタビュー結果を付加する場合:
+
+  const lastEntry = journalEntries[journalEntries.length - 1];
+
+  const { data, error } = await supabase
+    .from('journalEntries')
+    .update({ interview: interviewAnswers })
+    .eq('id', lastEntry.id)
+    .select();
+
+  if (error) {
+    console.error('更新失敗:', error);
+  } else {
+    const updatedEntry = data[0];
+    // ローカルstateも更新
     setJournalEntries((prevEntries) => {
       const lastIndex = prevEntries.length - 1;
-      const lastEntry = prevEntries[lastIndex];
-      const updatedEntry = { ...lastEntry, interview: interviewAnswers };
       return [...prevEntries.slice(0, lastIndex), updatedEntry];
     });
-    // インタビュー入力欄をリセットし、インタビューセクションを非表示にする
+
     setInterviewAnswers(['', '', '']);
-    setShowInterview(false);
-    // テスト時はtrueに
+    // setShowInterview(false);
+    setShowInterview(true);
+    // 開発時はfalseに
+    console.log('更新成功🎉:', updatedEntry);
+   }
   };
+
+
+  
+
 
   return (
     <section className='section' style={sectionStyle}>
       <div className='heading'>
-        <h1>What is Lorem Ipsum?</h1>
+        <h1>まだ叶ってない“未来”を、先に書いてみよう。
+        <span style={{ fontSize: '0.9em', color: '#666', marginBottom: '20px' }}>
+          What if you wrote it down?
+        </span>
+        </h1>
         <p>
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s.
+        このジャーナルは、あなたの“内なる手紙”。
+        「なぜそれができたの？」「どうして乗り越えられたの？」
+        未来の自分と対話するように、自由に書いてみて。
+        {/* <span>This journal is a letter to your inner self.  
+  “How did you do it?” “What helped you get through?”  
+  Imagine future-you answering those questions, and let the words flow.</span> */}
         </p>
       </div>
+      
       <div className='journalArea'>
         <div>
           <input
             placeholder={placeholderEventTheme}
             value={eventTheme}
             onChange={(e) => setEventTheme(e.target.value)}
+            disabled={journalEntries.length > 0} // journalEntries にデータがある場合は無効化
+            style={{
+              backgroundColor: journalEntries.length > 0 ? '#f0f0f0' : '#fff', // 無効化時の背景色を変更
+              cursor: journalEntries.length > 0 ? 'not-allowed' : 'text', // 無効化時のカーソルを変更
+            }}
           />
         </div>
         <div>
@@ -116,13 +151,22 @@ const Section = ({ mode }) => {
             placeholder={placeholderFeel}
             value={feel}
             onChange={(e) => setFeel(e.target.value)}
+            disabled={journalEntries.length > 0} // journalEntries にデータがある場合は無効化
+            style={{
+              backgroundColor: journalEntries.length > 0 ? '#f0f0f0' : '#fff', // 無効化時の背景色を変更
+              cursor: journalEntries.length > 0 ? 'not-allowed' : 'text', // 無効化時のカーソルを変更
+            }}
           />
         </div>
-        <button style={btnStyle} onClick={handleInitialSubmit}>record</button>
+        <div>
+        <button style={btnStyle} onClick={handleInitialSubmit}>
+          record
+        </button>
+        </div>
       </div>
       <div className='journalEntries'>
         {journalEntries.map((entry, index) => (
-          <div key={index} style={{ marginTop: '10px' }}>
+          <div key={index} className='skewedBox' style={{ marginTop: '10px' }}>
             <p><strong>{mode === 'good' ? 'たっせい! :' : 'うんうん :'}</strong> {entry.eventTheme}</p>
             <p><strong>{mode === 'good' ? 'すごい!! :' : 'なるほど :'}</strong> {entry.feel}</p>
           </div>
@@ -138,14 +182,37 @@ const Section = ({ mode }) => {
                 value={answer}
                 onChange={(e) => handleInterviewChange(index, e.target.value)}
               />
+
+                {index === interviewAnswers.length - 1 && interviewAnswers.length < 5 && (
+                  <button style={{ backgroundColor: addBtnBgColor }} className="addButton" onClick={addInterviewField}>Add more (max 5)</button>
+                )}
+                {/* 5行目だったら「まとめに入る」表示 */}
+                {index === 4 && (
+                  <button onClick={() => setShowSummaryInputs(true)}>
+                    まとめに入る
+                  </button>
+                )}
+
             </div>
           ))}
-          {interviewAnswers.length < 5 && (
-            <button style={{ backgroundColor: addBtnBgColor }} className="addButton" onClick={addInterviewField}>Add more (max 5)</button>
-          )}
+          
           <button style={{ backgroundColor: btnBgColor }} onClick={handleInterviewFinish}>Finish Interview</button>
         </div>
       )}
+                {showSummaryInputs && (
+            <>
+              <input
+                placeholder="タイトル"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+              />
+              <textarea
+                placeholder="まとめ・結論（reflection）"
+                value={reflection}
+                onChange={(e) => setReflection(e.target.value)}
+              />
+            </>
+          )}
 
 
     </section>

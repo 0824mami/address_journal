@@ -16,7 +16,24 @@ section button{
 
 .heading {
     text-align: center;
-    padding-bottom: 20px;
+    padding-bottom: 12px;
+}
+
+.heading h1 {
+    margin-bottom: 20px;
+  }
+  
+  .heading h1 span {
+    font-size: 0.6em;
+    color: #666;
+    display: block;
+    margin-bottom: 20px;
+  }
+
+p {
+    font-size: 12px;
+  line-height: 1.5;
+  color: #333;
 }
 
 .journalArea {
@@ -30,3 +47,34 @@ margin: 0 auto;
     padding: 4px 8px;
     border: 1px solid #ccc;
 }
+
+.skewedBox {
+    transform: rotate(-1.5deg);
+    margin-bottom: 40px;
+    padding: 20px;
+    background: #fff;
+    animation: gentleWiggle 6s ease-in-out infinite;
+  }
+  
+  @keyframes gentleWiggle {
+    0% {
+      transform: rotate(-1.5deg) translateY(0);
+    }
+    50% {
+      transform: rotate(-2deg) translateY(3px);
+    }
+    100% {
+      transform: rotate(-1.5deg) translateY(0);
+    }
+  }
+
+  @media (max-width: 437px) {
+    .journalArea {
+      flex-direction: column; /* 縦並びに変更 */
+      gap: 10px; /* スマホでは間隔を狭く */
+    }
+  
+    .journalArea input {
+      flex: 1 1 100%; /* 横幅いっぱい */
+    }
+  }
