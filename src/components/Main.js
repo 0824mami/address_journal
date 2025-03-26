@@ -16,15 +16,15 @@ const Main = ({ mode }) => {
 
   return (
     <main>
-      <div className='card' style={cardStyle}>
-
+      {/* <div className='mainWrapper'> */}
+        <div div className='card' style={cardStyle}>
           <h1>What is Lorem Ipsum?</h1>
-        
           </div>
-    
-        <div className='main_visual'>
-        <img src={imageSource} alt="" width="100%" />
-        </div>
+          <div className='main_visual'>
+          <img src={imageSource} alt="" width="100%" />
+          </div>
+      {/* </div> */}
+      
     </main>
   )
 }

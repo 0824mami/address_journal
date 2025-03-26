@@ -14,3 +14,13 @@ main .main_visual {
     max-height: 500px;
     top: -50px;
 }
+
+@media (max-width: 537px) {
+    .heading h1 {
+      font-size: 1.0em;
+    }
+  
+    .heading h1 span {
+      font-size: 0.5em;
+    }
+  } 
