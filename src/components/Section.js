@@ -6,7 +6,9 @@ const Section = ({ mode }) => {
   // mode の変更を確認するために useEffect を使う
   useEffect(() => {
     console.log("Section: Current mode is", mode);
-    setJournalEntries([]); // モードが変更されたときにジャ
+    setJournalEntries([]); // モードが変更ャーナルをリセット
+    setInterviewAnswers(['', '', '']);
+    setShowSummaryInputs(false); //modeChangeまとめリセット
   }, [mode]);
   
   const sectionStyle = {
@@ -16,7 +18,7 @@ const Section = ({ mode }) => {
   };
 
   const btnBgColor = mode === 'good' ? '#DE8D8D' : '#A4C4C3';
-  const addBtnBgColor = mode === 'good' ? 'transparent' : '#A4C4C3';
+  const addBtnBgColor = mode === 'good' ? 'DE8D8D' : '#A4C4C3';
 
   // mode に応じてテキストやスタイルを変える
   // const titleText = mode === 'good' ? '成功体験ジャーナル' : '落ち込みモードのジャーナル';
