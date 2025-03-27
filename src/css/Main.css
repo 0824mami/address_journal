@@ -1,21 +1,45 @@
-main .card {
+.mainWrapper {
+    position: relative; /* 親要素を基準に子要素を配置 */
+    display: flex;
+    width: 100%; 
+    height: 350px; /* ビューポート全体の高さを確保 */
+    overflow: hidden; 
+  }
+  
+
+.card {
+    position: absolute; /* 親要素（.mainWrapper）を基準に配置 */ 
     margin: 6px 16px;
     padding: 8px 18px;
-    width: 400px;
-    height: 220px;
+    z-index: 2;
     background: #DE8D8D;
     box-shadow: 0 0 5px #ccc;
     font-size: 0.6rem;
     color: #fff;
+    max-width: 350px; 
+    min-height: 170px; 
+}
+.main_visual {
+    position: absolute; 
+    top: 50%;
+    right: 0px;
+    transform: translateY(-50%);
+    z-index: 1; /* カードより背面に表示 */
+    width: auto; 
+    object-fit: cover;
 }
 
-main .main_visual {
-    right: 16px;
-    max-height: 500px;
-    top: -50px;
-}
 
 @media (max-width: 537px) {
+    .mainWrapper {
+        position: relative; /* 親要素を基準に子要素を配置 */
+        display: flex;
+        max-height: 200px;
+      }
+    .main_visual {
+        padding-left: 50px;
+    }
+      
     .heading h1 {
       font-size: 1.0em;
     }

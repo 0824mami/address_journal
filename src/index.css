@@ -21,12 +21,12 @@ code {
 }
 
 main {
-  min-height: 400px;
-  display: flex;
+  min-height: 200px;
+  /* display: flex;
   justify-content: space-between;
   align-items: center;
   overflow: hidden;
-  background: #fff;
+  background: #fff; */
 }
 
 section {
@@ -38,3 +38,24 @@ section {
   background: #F3EBDE;
   color: rgb(40, 39, 39);
 }
+
+footer {
+   background: #fff;
+   width: 100%;
+   min-height: 70px;
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: space-around;
+   align-items: center;
+   border-top: 1px solid rgba(0, 0, 0, 0.05);
+   margin-top: 10px;
+}
+
+footer span {
+  font-size: 0.8rem;
+  color: #333;
+  letter-spacing: 1px;
+  font-weight: 500;
+  margin: 10px;
+}
+

@@ -65,7 +65,7 @@ header .close {
     color: #DD8E86;
 }
 
-@media (max-width: 737px) {
+@media (max-width: 537px) {
     header ul {
         position: fixed;
         top: -100%;
