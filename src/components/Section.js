@@ -213,7 +213,8 @@ const Section = ({ mode }) => {
                 {/* 5行目だったら「まとめに入る」表示 */}
                 <div>
                 {index === 4 && (
-                  <button onClick={() => setShowSummaryInputs(true)}>
+                  <button style={{ backgroundColor: addBtnBgColor }} 
+                  onClick={() => setShowSummaryInputs(true)}>
                     まとめに入る
                   </button>
                 )}
@@ -241,7 +242,8 @@ const Section = ({ mode }) => {
                 value={reflection}
                 onChange={(e) => setReflection(e.target.value)}
               />
-              <button style={{ backgroundColor: btnBgColor }} onClick={handleInterviewFinish}>
+              <button style={{ backgroundColor: btnBgColor }} 
+              onClick={handleInterviewFinish}>
                 Finish Interview
               </button>
               </dix>
