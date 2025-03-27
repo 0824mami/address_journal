@@ -3,10 +3,9 @@ import supabase from '../lib/supabase';
 import '../css/Section.css'
 
 const Section = ({ mode }) => {
-  // mode の変更を確認するために useEffect を使う
   useEffect(() => {
     console.log("Section: Current mode is", mode);
-    setJournalEntries([]); // モードが変更されたときにジャ
+    setJournalEntries([]); // モードが変更されたときにジャーナルをリセット
   }, [mode]);
   
   const sectionStyle = {
@@ -41,6 +40,7 @@ const Section = ({ mode }) => {
 
   // 初期入力送信時の処理
   const handleInitialSubmit = async () => {
+    
     if (eventTheme.trim() === '' && feel.trim() === '') return;
   
     const newEntry = {
