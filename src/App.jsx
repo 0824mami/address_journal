@@ -7,8 +7,7 @@ import Footer from './components/Footer';
 import Contact from './pages/Contact';
 import About from './pages/About';
 import TestAnimation from './components/TestAnimation'
-import JournalList from './components/JournalList';
-
+import './index.css'
 
 
 const App = () => {
@@ -21,7 +20,6 @@ const App = () => {
         <Header mode={mode} setMode={setMode} />
         <TestAnimation />
           <Main mode={mode} />
-          <JournalList />
           <Section mode={mode} />
             <Routes>
               <Route path="/contact" element={<Contact mode={mode} />} />
