@@ -6,6 +6,10 @@ header {
     overflow: hidden;
     background: #F3EBDE;
 }
+header .logo {
+    letter-spacing: 0.4px;
+    padding-left: 5px;
+}
 
 header .logo a {
     text-decoration: none;
