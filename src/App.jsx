@@ -8,25 +8,19 @@ import Contact from './pages/Contact';
 import About from './pages/About';
 import TestAnimation from './components/TestAnimation'
 import './css/index.css'
-// import JournalList from './components/JournalList';
 
 
 const App = () => {
   // modeの状態を定義（初期は 'good'）
   const [mode, setMode] = useState('good');
-  // const [showJournalList, setShowJournalList] = useState(false);
-  // render
+  
   return (
     <div className='app'>
         {/* 各コンポーネントにmodeとsetModeを渡す */}
         <Header mode={mode} setMode={setMode} />
         <TestAnimation />
           <Main mode={mode} />
-          {/* <button onClick={() => setShowJournalList(!showJournalList)}>
-            {showJournalList ? 'ジャーナルを閉じる' : 'ジャーナルを見る'}
-          </button>
-          {showJournalList && <JournalList />} */}
-          <Section mode={mode} />
+            <Section mode={mode} />
             <Routes>
               <Route path="/contact" element={<Contact mode={mode} />} />
               <Route path="/about" element={<About mode={mode} />} />

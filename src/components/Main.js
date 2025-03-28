@@ -40,7 +40,10 @@ const Main = ({ mode }) => {
             </p> */}
         </div>
         <button className='toggleJournalBtn'
-            onClick={() => setShowList(!showList)}
+            onClick={() => {
+              console.log('ジャーナルボタン押された！');
+              setShowList(!showList);
+            }}
             style={{
               position: 'absolute',
               top: '10px',
@@ -50,7 +53,7 @@ const Main = ({ mode }) => {
               {showList ? '📕 閉じる' : '📓 過去のジャーナルを見る'}
             </button>
             {showList && (
-              <JournalList />
+              <JournalList show={showList} />
             )
             } 
       </div>
