@@ -215,7 +215,7 @@ const Section = ({ mode }) => {
                 {index === 4 && (
                   <button style={{ backgroundColor: subBtnBgColor }} 
                   onClick={() => setShowSummaryInputs(true)}>
-                    summarize
+                    まとめに入る
                   </button>
                 )}
                 </div>
@@ -237,18 +237,20 @@ const Section = ({ mode }) => {
               />
             </div>
              <div>
-              <textarea
-                placeholder="まとめ・結論（reflection）"
-                value={reflection}
-                onChange={(e) => setReflection(e.target.value)}
-              />
-              <button style={{ backgroundColor: btnBgColor }} 
-              onClick={handleInterviewFinish}>
-                Finish Interview
-              </button>
+                <textarea
+                  placeholder="まとめ・結論（reflection）"
+                  value={reflection}
+                  onChange={(e) => setReflection(e.target.value)}
+                />
+                <div>
+                <button style={{ backgroundColor: btnBgColor }} 
+                onClick={handleInterviewFinish}>
+                  Finish Interview
+                </button>
+                </div>
+                </div>
+                </>
               </div>
-            </>
-            </div>
             )}
           </div>
         </div>
