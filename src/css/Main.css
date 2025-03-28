@@ -2,7 +2,7 @@
     position: relative; /* 親要素を基準に子要素を配置 */
     display: flex;
     width: 100%; 
-    height: 350px; /* ビューポート全体の高さを確保 */
+    height: 350px;
     overflow: hidden; 
   }
   
@@ -28,8 +28,8 @@
     color: #fff;
     line-height: 1.7;
     letter-spacing: 1px;
-    max-width: 350px; 
-    min-height: 170px;
+    width: 40vw; /* ビューポート幅の1/3 */
+    height: 33.33vh; /* ビューポート高さの1/3 */
     opacity: 0; /* 初期状態で透明 */
     animation: fadeIn 0.8s ease-out forwards; 
 }
@@ -37,7 +37,7 @@
     position: absolute; 
     top: 50%;
     right: 0px;
-    transform: translateY(-50%);
+    transform: translate(10%, -55%) scale(0.8);
     z-index: 2; /* カードより背面に表示 */
     width: auto; 
     object-fit: cover;
@@ -79,11 +79,11 @@
     }
       
     .heading h1 {
-      font-size: 1.0em;
+      font-size: 0.6rem;
     }
   
     .heading h1 span {
-      font-size: 0.5em;
+      font-size: 0.6em;
     }
   } 
 

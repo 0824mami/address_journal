@@ -1,14 +1,15 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import '../index.css'
+import '../css/index.css'
 
 const Footer = () => {
   return (
     <footer>
-      <span className='copyright'>Copyright 2025</span>
+      <span className='copyright'>
+      Copyright © 2023 Okampany Website</span>
     
-    <div className='footer-social'>
-      <Link to='/'><i className='fab-f-facebook-f'></i></Link>
+      <div className='footer-social'>
+      <Link to='/'><i className="fa-brands fa-facebook-f"></i></Link>
         </div>
     </footer>
     

@@ -51,7 +51,8 @@ const Main = ({ mode }) => {
             </button>
             {showList && (
               <JournalList />
-            )} 
+            )
+            } 
       </div>
     </main>
   )
