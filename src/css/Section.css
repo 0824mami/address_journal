@@ -1,7 +1,8 @@
-/* section {
-   
-
-} */
+.sectionWrapper{
+  max-width: 70vw; /* 画面の70%の幅 */
+  margin: 0 auto;  /* 中央寄せ */
+  padding: 40px 20px;
+}
 
 section button{
     color: white;
@@ -42,15 +43,27 @@ p {
 }
 
 .journalArea {
-margin: 0 auto;
- display: flex;
+  margin: 0 auto;
+  text-align: center;
  /* flex-direction: column; */
  justify-content: space-between;
 }
 
-.journalArea input {
+.journalInput {
+    display: flex;
     padding: 4px 8px;
-    border: 1px solid #ccc;
+    justify-content: space-between;
+    margin: 4px;
+}
+
+.journalInput input {
+  
+  border: 1px solid #ccc;
+}
+
+.buttonWrapper {
+  text-align: center; /* 中央寄せ */
+  margin-top: 10px;
 }
 
 .skewedBox {
@@ -60,6 +73,31 @@ margin: 0 auto;
     background: #fff;
     animation: gentleWiggle 6s ease-in-out infinite;
   }
+
+  .summaryArea {
+    margin: 20px auto;
+    padding: 20px;
+    max-width: 600px;
+    background-color: #f9f9f9; /* 背景色 */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .summaryArea div {
+    margin-bottom: 16px; /* 各要素の間隔 */
+  }
+  
+  .summaryArea input,
+.summaryArea textarea {
+  width: 100%; /* 幅を親要素に合わせる */
+  padding: 10px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  border: 1px solid #ccc; /* 枠線 */
+  border-radius: 4px;
+  font-size: 16px;
+  box-sizing: border-box; /* パディングを含めた幅を計算 */
+}
+
   
   @keyframes gentleWiggle {
     0% {
@@ -74,7 +112,7 @@ margin: 0 auto;
   }
 
   @media (max-width: 437px) {
-    .journalArea {
+    .journalInput {
       flex-direction: column; /* 縦並びに変更 */
       gap: 10px; /* スマホでは間隔を狭く */
     }

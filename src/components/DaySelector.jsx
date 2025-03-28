@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 
 const DaySelector = ({ onDayChange }) => {
-    const [ selectedDay, setSelecttesdDay] = useState('1');
+    const [ selectedDay, setSelecteddDay] = useState('1');
 
 const handleChange = (e) => {
     const day = e.target.value;
-    setSelecttesdDay(day);
+    setSelecteddDay(day);
     onDayChange(day);
 }
 

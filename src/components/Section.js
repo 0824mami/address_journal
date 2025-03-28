@@ -116,14 +116,13 @@ const Section = ({ mode }) => {
   };
 
 
-  
-
-
   return (
-    <section className='section' style={sectionStyle}>
-      <div className='heading'>
-      {mode === 'good' ? (
-    <>
+      <section className='section' style={sectionStyle}>
+    <div className="sectionWrapper">
+
+          <div className='heading'>
+          {mode === 'good' ? (
+        <>
         <h1>まだ叶ってない“未来”を、先に書いてみよう。
         <span style={{ fontSize: '0.9em', color: '#666', marginBottom: '20px' }}>
           What if you wrote it down?
@@ -134,12 +133,12 @@ const Section = ({ mode }) => {
         このジャーナルは、あなたの“内なる手紙”。
         「なぜそれができたの？」「どうして乗り越えられたの？」
         未来の自分と対話するように、自由に書いてみて。
-        {/* <span>This journal is a letter to your inner self.  
-  “How did you do it?” “What helped you get through?”  
-  Imagine future-you answering those questions, and let the words flow.</span> */}
-          </p>
-        </>
-  ) : (
+            {/* <span>This journal is a letter to your inner self.  
+            “How did you do it?” “What helped you get through?”  
+            Imagine future-you answering those questions, and let the words flow.</span> */}
+              </p>
+            </>
+      ) : (
     <>
       <h1>このジャーナルは、モヤモヤした気持ちを一度、外に出す場所
           <span style={{ fontSize: '0.9em', color: '#666', marginBottom: '20px' }}>
@@ -154,10 +153,9 @@ const Section = ({ mode }) => {
           </p>
           </>
   )}
-</div>
-      
-      <div className='journalArea'>
-        <div>
+  </div>
+    <div className='journalArea'>
+        <div className='journalInput'>
           <input
             placeholder={placeholderEventTheme}
             value={eventTheme}
@@ -168,25 +166,25 @@ const Section = ({ mode }) => {
               cursor: journalEntries.length > 0 ? 'not-allowed' : 'text', // 無効化時のカーソルを変更
             }}
           />
-        </div>
-        <div>
           <input
-            placeholder={placeholderFeel}
-            value={feel}
-            onChange={(e) => setFeel(e.target.value)}
-            disabled={journalEntries.length > 0} // journalEntries にデータがある場合は無効化
-            style={{
-              backgroundColor: journalEntries.length > 0 ? '#f0f0f0' : '#fff', // 無効化時の背景色を変更
-              cursor: journalEntries.length > 0 ? 'not-allowed' : 'text', // 無効化時のカーソルを変更
-            }}
-          />
+              placeholder={placeholderFeel}
+              value={feel}
+              onChange={(e) => setFeel(e.target.value)}
+              disabled={journalEntries.length > 0} // journalEntries にデータがある場合は無効化
+              style={{
+                backgroundColor: journalEntries.length > 0 ? '#f0f0f0' : '#fff', // 無効化時の背景色を変更
+                cursor: journalEntries.length > 0 ? 'not-allowed' : 'text', // 無効化時のカーソルを変更
+              }}
+            />
         </div>
-        <div>
-        <button style={btnStyle} onClick={handleInitialSubmit}>
-          record
-        </button>
+       
+        <div className="buttonWrapper">
+          <button style={btnStyle} onClick={handleInitialSubmit}>
+            record
+          </button>
         </div>
-      </div>
+        
+      
       <div className='journalEntries'>
         {journalEntries.map((entry, index) => (
           <div key={index} className='skewedBox' style={{ marginTop: '10px' }}>
@@ -213,11 +211,11 @@ const Section = ({ mode }) => {
                     Add more (max 5)</button>
                 )}
                 {/* 5行目だったら「まとめに入る」表示 */}
-                <div>
+                <div className='buttonWrapper'>
                 {index === 4 && (
                   <button style={{ backgroundColor: addBtnBgColor }} 
                   onClick={() => setShowSummaryInputs(true)}>
-                    まとめに入る
+                    summarize
                   </button>
                 )}
                 </div>
@@ -238,7 +236,7 @@ const Section = ({ mode }) => {
                 }}
               />
             </div>
-             <dix>
+             <div>
               <textarea
                 placeholder="まとめ・結論（reflection）"
                 value={reflection}
@@ -248,11 +246,14 @@ const Section = ({ mode }) => {
               onClick={handleInterviewFinish}>
                 Finish Interview
               </button>
-              </dix>
+              </div>
             </>
             </div>
-          )}
-</section>
+            )}
+          </div>
+        </div>
+      </section>
+    
   )
 }
 
