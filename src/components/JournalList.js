@@ -2,49 +2,48 @@ import React, { useEffect, useState } from 'react';
 import supabase from '../lib/supabase';
 import { motion } from 'framer-motion';
 import '../css/Main.css';
+import DaySelector from './DaySelector';
+
 
 const JournalList = ({ show }) => {
-  const [entries, setEntries] = useState([]);  
+const [selectedDay, setSelectedDay] = useState(null);
+const [entries, setEntries] = useState([]);  
 
   useEffect(() => {
     if (!show) return;
     const fetchEntries = async () => {
-      const { data, error } = await supabase
-        .from('journalEntries') 
-        .select('*')
-        .order('created_at', { ascending: false });
+      let query = supabase
+      .from('journalEntries')
+      .select('*')
+      .order('created_at', { ascending: false });
 
-      if (error) {
-        console.error('データ取得エラー:', error);
-      } else {
-        setEntries(data);
-      }
-    };
+        if (selectedDay) {
+          const dayStr = String(selectedDay).padStart(2, '0');
+          const today = new Date();
+          const year = today.getFullYear();
+          const month = String(today.getMonth() + 1).padStart(2, '0');
+          const datePattern = `${year}-${month}-${dayStr}%`;
+    
+          query = query.like('created_at', datePattern);
+        }
+    
+        const { data, error } = await query;
+    
+        if (error) {
+          console.error('データ取得エラー:', error);
+        } else {
+          setEntries(data);
+        }
+      };
 
     fetchEntries();
-  }, [show]);
+  }, [show, selectedDay]);
 
   return (
     <div style={{ position: 'relative' }}>
-      {/* トグルボタン */}
-      {/* <button
-        className="toggleJournalBtn"
-        onClick={() => {
-            console.log('ボタンがクリックされました'); // ボタンがクリックされたときにログを出力
-            setShowList(!showList); 
-            console.log('showListの状態:', !showList);// 状態を切り替え
-          }}
-        style={{
-          position: 'absolute',
-          top: '10px',
-          right: '10px',
-          zIndex: 2, // 画像より前面に表示
-        }}
-      >
-        {showList ? '📕 閉じる' : '📓 過去のジャーナルを見る'}
-      </button> */}
+      
 
-    
+      <DaySelector onDayChange={setSelectedDay} />
         <motion.section
           className="journal-list"
           initial={{ opacity: 0, x: 50 }} // 右から100pxの位置＋透明
@@ -52,6 +51,7 @@ const JournalList = ({ show }) => {
           transition={{ duration: 0.4, ease: 'easeOut' }}
           style={{ overflow: 'hidden', padding: '20px' }} 
         >
+          
           {entries.map((entry) => (
             <motion.div
               key={entry.id}
@@ -82,8 +82,7 @@ const JournalList = ({ show }) => {
             </motion.div>
           ))}
         </motion.section>
-      
-    </div>
+      </div>
   );
 };
 

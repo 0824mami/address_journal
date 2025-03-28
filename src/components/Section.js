@@ -248,6 +248,20 @@ const Section = ({ mode }) => {
                   Finish Interview
                 </button>
                 </div>
+                </div>                <div>
+                  <textarea
+                    placeholder="まとめ・結論（reflection）"
+                    value={reflection}
+                    onChange={(e) => setReflection(e.target.value)}
+                  />
+                  <div> {/* textarea と button をくくる */}
+                    <button
+                      style={{ backgroundColor: btnBgColor }}
+                      onClick={handleInterviewFinish}
+                    >
+                      Finish Interview
+                    </button>
+                  </div>
                 </div>
                 </>
               </div>
