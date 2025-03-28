@@ -6,7 +6,7 @@ const Footer = () => {
   return (
     <footer>
       <span className='copyright'>
-      Copyright © 2023 Okampany Website</span>
+      Copyright © 2023 Okampany</span>
     
       <div className='footer-social'>
       <Link to='/'><i className="fa-brands fa-facebook-f"></i></Link>

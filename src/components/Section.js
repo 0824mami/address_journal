@@ -18,7 +18,7 @@ const Section = ({ mode }) => {
   };
 
   const btnBgColor = mode === 'good' ? '#DE8D8D' : '#A4C4C3';
-  const addBtnBgColor = mode === 'good' ? 'DE8D8D' : '#A4C4C3';
+  const subBtnBgColor = mode === 'good' ? '#DE8D8D' : '#A4C4C3';
 
   // mode に応じてテキストやスタイルを変える
   // const titleText = mode === 'good' ? '成功体験ジャーナル' : '落ち込みモードのジャーナル';
@@ -35,7 +35,7 @@ const Section = ({ mode }) => {
 
   // インタビューセクションの表示状態と回答内容
   const [showInterview, setShowInterview] = useState(false);
-  const [interviewAnswers, setInterviewAnswers] = useState(['', '', '']);
+  const [interviewAnswers, setInterviewAnswers] = useState(['', '', '', '', '']);
 // buttonした
   const [title, setTitle] = useState('');
   const [reflection, setReflection] = useState('');
@@ -205,15 +205,15 @@ const Section = ({ mode }) => {
               />
 
                 {index === interviewAnswers.length - 1 && interviewAnswers.length < 5 && (
-                  <button style={{ backgroundColor: addBtnBgColor }} 
-                  className="addButton" 
+                  <button style={{ backgroundColor: subBtnBgColor }} 
+                  className="subButton" 
                   onClick={addInterviewField}>
-                    Add more (max 5)</button>
+                    BlankOK</button>
                 )}
                 {/* 5行目だったら「まとめに入る」表示 */}
                 <div className='buttonWrapper'>
                 {index === 4 && (
-                  <button style={{ backgroundColor: addBtnBgColor }} 
+                  <button style={{ backgroundColor: subBtnBgColor }} 
                   onClick={() => setShowSummaryInputs(true)}>
                     summarize
                   </button>

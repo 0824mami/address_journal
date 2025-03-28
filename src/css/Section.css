@@ -10,10 +10,9 @@ section button{
     padding: 6px 12px;
 }
 
-.addButton {
+.subButton {
     opacity: 0.6;
     color: #444;
-    /* background-color: transparent; */
     border: 1px solid #ccc;
     border-radius: 8px;
     padding: 4px 8px;
@@ -45,6 +44,7 @@ p {
 .journalArea {
   margin: 0 auto;
   text-align: center;
+  gap: 6px; 
  /* flex-direction: column; */
  justify-content: space-between;
 }
@@ -52,11 +52,16 @@ p {
 .journalInput {
     display: flex;
     padding: 4px 8px;
+    gap: 6px; 
     justify-content: space-between;
     margin: 4px;
 }
 
 .journalInput input {
+  flex: 1 1 23%;
+  padding: 5px;
+  min-width: 80px;
+  border-radius: 4px;
   
   border: 1px solid #ccc;
 }
@@ -86,9 +91,11 @@ p {
     margin-bottom: 16px; /* 各要素の間隔 */
   }
   
-  .summaryArea input,
+.summaryArea input,
 .summaryArea textarea {
-  width: 100%; /* 幅を親要素に合わせる */
+  flex: 1 1 33%; /* 画面幅の1/3を確保 */
+  min-width: 300px; /* 最小幅を設定 */
+  max-width: 33%;
   padding: 10px;
   margin-top: 8px;
   margin-bottom: 8px;
