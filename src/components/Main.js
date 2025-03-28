@@ -3,6 +3,7 @@ import '../css/Main.css'
 import MvGood from '../img/timeCapsule.jpg'; // GOODモード用の画像
 import MvBad from '../img/SereneWaterLily_inTranquilPond_softlyPeaceful.png';
 import JournalList from './JournalList';
+import DaySelector from './DaySelector';
 
 const Main = ({ mode }) => {
 // mode に応じた背景色を指定（GOOD: ピンク、BAD: 青）
@@ -14,6 +15,7 @@ const Main = ({ mode }) => {
   // mode に応じた画像を切り替え
   const imageSource = mode === 'good' ? MvGood : MvBad;
   const [showList, setShowList] = useState(false);
+  const [selectedDay, setSelectedDay] = useState(null);
 
   const welcomeTextH1 = mode === 
   'good' ? 'ようこそ! 今日のあなた' : 'おつかれさま、今日のあなた。';
@@ -24,6 +26,9 @@ const Main = ({ mode }) => {
 
   return (
     <main>
+      <div className="day-selector-wrapper">
+        <DaySelector onDayChange={setSelectedDay} />
+      </div>
       <div className='mainWrapper'>
         <div className='main_visual'>
               <img src={imageSource} alt="" width="100%" />
@@ -53,7 +58,7 @@ const Main = ({ mode }) => {
               {showList ? '📕 閉じる' : '📓 過去のジャーナルを見る'}
             </button>
             {showList && (
-              <JournalList show={showList} />
+              <JournalList show={showList} selectedDay={selectedDay}/>
             )
             } 
       </div>

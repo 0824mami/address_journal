@@ -1,29 +1,16 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 const DaySelector = ({ onDayChange }) => {
-    const [ selectedDay, setSelecteddDay] = useState('1');
-
-const handleChange = (e) => {
-    const day = e.target.value;
-    setSelecteddDay(day);
-    onDayChange(day);
-}
-
-
   return (
-    <select value={ selectedDay } onChange={ handleChange }>
-         {[...Array(31)].map((_, index) => {
-            const day = index + 1; // 1日から31日まで
-            return (
-                <option key={day} value={day}>
-                {day}日
-                </option>
-            );
-            })}
+    <select onChange={(e) => onDayChange(e.target.value)} className="day-select">
+      {[...Array(31)].map((_, index) => (
+        <option key={index + 1} value={index + 1}>
+          {index + 1}日
+        </option>
+      ))}
     </select>
-    
-  )
-}
+  );
+};
 
 export default DaySelector
 

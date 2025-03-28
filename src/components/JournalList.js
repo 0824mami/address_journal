@@ -41,9 +41,10 @@ const [entries, setEntries] = useState([]);
 
   return (
     <div style={{ position: 'relative' }}>
-      
-
+      <div className="day-selector-wrapper">
       <DaySelector onDayChange={setSelectedDay} />
+    </div>
+
         <motion.section
           className="journal-list"
           initial={{ opacity: 0, x: 50 }} // 右から100pxの位置＋透明

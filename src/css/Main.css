@@ -82,6 +82,17 @@
   border-radius: 10px;
 }
 
+.day-selector-wrapper {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 6;
+  background: rgba(255,255,255,0.9); /* 透け背景で読みやすく */
+  padding: 4px 8px;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
 @media (max-width: 537px) {
     .mainWrapper {
         position: relative; /* 親要素を基準に子要素を配置 */
