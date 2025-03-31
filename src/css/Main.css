@@ -84,7 +84,7 @@
 
 .day-selector-wrapper {
   position: absolute;
-  top: 20px;
+  top: 130px;
   right: 20px;
   z-index: 6;
   background: rgba(255,255,255,0.9); /* 透け背景で読みやすく */
