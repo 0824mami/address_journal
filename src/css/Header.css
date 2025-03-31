@@ -50,14 +50,16 @@ nav .nav_toggle:hover svg path {
     fill: #007aff;
 }
 
-nav .nav_toggle span {
+.newDot {
     position: absolute;
-    top: -10px;
-    right: 6px;
+    top: -5px;
+    right: 0;
+    width: 8px; /* 小さな丸のサイズ */
+    height: 8px;
     background: #dd7f74;
-    font-size: 10px;
-    color: white;
-    padding: 3px 5px;
+    /* font-size: 10px; */
+    /* color: white;
+    padding: 3px 5px; */
     border-radius: 50%;
     /* z-index: -1; */
 }

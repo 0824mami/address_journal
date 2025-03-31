@@ -45,7 +45,7 @@ const Header = ({ mode, setMode }) => {
                         <img src={Close} alt="" width="22" />
                     </li>
                     <li className="nav_toggle">
-                        <span>0</span>
+                        <span className='newDot'></span>
                         {/* 月アイコンにクリックイベントを追加 */}
                         <button onClick={toggleMode}>
                             {mode === 'good' ? (
