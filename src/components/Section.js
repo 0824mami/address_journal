@@ -8,7 +8,7 @@ const Section = ({ mode }) => {
   useEffect(() => {
     console.log("Section: Current mode is", mode);
     setJournalEntries([]); // モードが変更ャーナルをリセット
-    setInterviewAnswers(['', '', '']);
+    setInterviewAnswers(['', '', '', '', '']);
     setShowSummaryInputs(false); //modeChangeまとめリセット
   }, [mode]);
   
@@ -72,12 +72,6 @@ const Section = ({ mode }) => {
     }
   };
 
-  // 動的にインタビュー入力欄を追加する（最大5つまで）
-  const addInterviewField = () => {
-    if (interviewAnswers.length < 5) {
-      setInterviewAnswers([...interviewAnswers, '']);
-    }
-  };
    // インタビュー入力欄の値を更新する関数
   const handleInterviewChange = (index, value) => {
     const newAnswers = [...interviewAnswers];
@@ -109,7 +103,7 @@ const Section = ({ mode }) => {
       return [...prevEntries.slice(0, lastIndex), updatedEntry];
     });
 
-    setInterviewAnswers(['', '', '']);
+    setInterviewAnswers(['', '', '', '', '']);
     // setShowInterview(false);
     setShowInterview(true);
     // 開発時はfalseに
@@ -190,40 +184,33 @@ const Section = ({ mode }) => {
       <div className='journalEntries'>
         {journalEntries.map((entry, index) => (
           <div key={index} className='skewedBox' style={{ marginTop: '10px' }}>
-            <p><strong>{mode === 'good' ? 'たっせい! :' : 'うんうん :'}</strong> {entry.eventTheme}</p>
-            <p><strong>{mode === 'good' ? 'すごい!! :' : 'なるほど :'}</strong> {entry.feel}</p>
+            <p><strong>{mode === 'good' ? 'できたこと :' : '起こったこと :'}</strong> {entry.eventTheme}</p>
+            <p><strong>{mode === 'good' ? '感じたこと :' : '感じたこと :'}</strong> {entry.feel}</p>
           </div>
         ))}
       </div>
       {showInterview && (
         <div className='interviewSection' style={{ marginTop: '20px' }}>
           <h3>{questionText}</h3>
-          {interviewAnswers.map((answer, index) => (
-            <div key={index}>
-              <input
-                placeholder={`Bullet point ${index + 1}`}
-                value={answer}
-                onChange={(e) => handleInterviewChange(index, e.target.value)}
-              />
+    {interviewAnswers.map((answer, index) => (
+      <div key={index}>
+        <input
+          placeholder={`Bullet point ${index + 1}`}
+          value={answer}
+          onChange={(e) => handleInterviewChange(index, e.target.value)}
+        />
+      </div>
+    ))}
 
-                {index === interviewAnswers.length - 1 && interviewAnswers.length < 5 && (
-                  <button style={{ backgroundColor: subBtnBgColor }} 
-                  className="subButton" 
-                  onClick={addInterviewField}>
-                    BlankOK</button>
-                )}
-                {/* 5行目だったら「まとめに入る」表示 */}
-                <div className='buttonWrapper'>
-                {index === 4 && (
-                  <button style={{ backgroundColor: subBtnBgColor }} 
-                  onClick={() => setShowSummaryInputs(true)}>
-                    まとめに入る
-                  </button>
-                )}
-                </div>
-
-            </div>
-          ))}
+    {/* 常に 5 行表示されるので、まとめボタンは下に表示 */}
+    <div className='buttonWrapper'>
+      <button
+        style={{ backgroundColor: subBtnBgColor }}
+        onClick={() => setShowSummaryInputs(true)}
+      >
+        まとめに入る
+      </button>
+    </div>
         </div>
       )}
         {showSummaryInputs && (
