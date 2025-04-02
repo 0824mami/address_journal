@@ -20,6 +20,7 @@ const Section = ({ mode }) => {
 
   const btnBgColor = mode === 'good' ? '#DE8D8D' : '#A4C4C3';
   const subBtnBgColor = mode === 'good' ? '#DE8D8D' : '#A4C4C3';
+  const subBgColor = mode === 'good' ? 'rgba(222, 141, 141, 0.25)' : 'rgba(164, 196, 195, 0.25)';
 
   // mode に応じてテキストやスタイルを変える
   // const titleText = mode === 'good' ? '成功体験ジャーナル' : '落ち込みモードのジャーナル';
@@ -214,7 +215,10 @@ const Section = ({ mode }) => {
         </div>
       )}
         {showSummaryInputs && (
-          <div className='summaryArea'>
+          <div className='summaryArea'
+          style={{
+            backgroundColor: subBgColor, // 動的に背景色を適用
+          }}>
             <>
             <div>
             <input
