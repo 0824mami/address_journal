@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import supabase from '../lib/supabase';
+import { getCurrentUser } from '../modules/auth.repository';
 import '../css/Section.css'
 
 const Section = ({ mode }) => {
@@ -43,12 +44,15 @@ const Section = ({ mode }) => {
 
   // 初期入力送信時の処理
   const handleInitialSubmit = async () => {
+    const user = await getCurrentUser();
+    if (!user) return;
     if (eventTheme.trim() === '' && feel.trim() === '') return;
   
     const newEntry = {
       eventTheme,
       feel,
-      mode, // モードも一緒に保存しておくと便利！
+      mode, 
+      user_id: user.id,
     };
   
     const { data, error } = await supabase
@@ -59,12 +63,10 @@ const Section = ({ mode }) => {
     if (error) {
       console.error('送信失敗:', error);
     } else {
-      console.log('送信成功！:', data);
       const insertedEntry = data[0];
       setEventTheme('');
       setFeel('');
       setShowInterview(true);
-      // 画面上にも追加するならこれもあり：
       setJournalEntries([...journalEntries, insertedEntry]);
       console.log('Updated journalEntries:', [...journalEntries, newEntry]);
     }
@@ -248,21 +250,8 @@ const Section = ({ mode }) => {
                   Finish Interview
                 </button>
                 </div>
-                </div>                <div>
-                  <textarea
-                    placeholder="まとめ・結論（reflection）"
-                    value={reflection}
-                    onChange={(e) => setReflection(e.target.value)}
-                  />
-                  <div> {/* textarea と button をくくる */}
-                    <button
-                      style={{ backgroundColor: btnBgColor }}
-                      onClick={handleInterviewFinish}
-                    >
-                      Finish Interview
-                    </button>
-                  </div>
-                </div>
+                </div>                
+                
                 </>
               </div>
             )}

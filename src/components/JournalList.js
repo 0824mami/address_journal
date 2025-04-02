@@ -2,19 +2,25 @@ import React, { useEffect, useState } from 'react';
 import supabase from '../lib/supabase';
 import { motion } from 'framer-motion';
 import '../css/Main.css';
+import { getCurrentUser } from '../modules/auth.repository';
 import DaySelector from './DaySelector';
 
 
 const JournalList = ({ show }) => {
 const [selectedDay, setSelectedDay] = useState(null);
-const [entries, setEntries] = useState([]);  
+const [entries, setEntries] = useState([]);
+const [error, setError] = useState(null);    
 
   useEffect(() => {
     if (!show) return;
     const fetchEntries = async () => {
+      const user = await getCurrentUser();
+      if (!user) return;
+
       let query = supabase
       .from('journalEntries')
       .select('*')
+      .eq('user_id', user.id) // ログインユーザーのデータだけ取得
       .order('created_at', { ascending: false });
 
         if (selectedDay) {
@@ -31,6 +37,7 @@ const [entries, setEntries] = useState([]);
     
         if (error) {
           console.error('データ取得エラー:', error);
+          setError('データの取得に失敗しました。');
         } else {
           setEntries(data);
         }
