@@ -6,7 +6,7 @@ import Section from './components/Section';
 import Footer from './components/Footer';
 import Contact from './pages/Contact';
 import About from './pages/About';
-import { signInAnonymously } from './modules/auth.repository';
+import { signInAnonymously, getCurrentUser } from './modules/auth.repository';
 import './css/index.css'
 
 
@@ -16,13 +16,20 @@ const App = () => {
 
   useEffect(() => {
     const login = async () => {
-      try {
-        const user = await signInAnonymously(); 
-        console.log('匿名ログイン成功:', user);
-      } catch (error) {
-        console.error('匿名ログイン失敗:', error.message);
+      const user = await getCurrentUser(); // 🔍 セッション確認
+
+      if (!user) {
+        try {
+          const newUser = await signInAnonymously();
+          console.log('匿名ログイン成功:', newUser);
+        } catch (error) {
+          console.error('匿名ログイン失敗:', error.message);
+        }
+      } else {
+        console.log('既存ユーザー:', user);
       }
     };
+
     login();
   }, []);
   
